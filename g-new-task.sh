@@ -19,7 +19,7 @@ if [[ -z $1 ]] || [[ $1 == '--help' ]] || [[ $1 == '-h' ]]; then
 fi
 
 if [ -z ${GITHUB_USER+x} ] || [ -z ${GITHUB_PASSWORD+x} ] && [ -z ${GITHUB_TOKEN+x} ]; then
-    printf "If you want to move the task you should set the environment variables bellow:
+    printf "If you want to use this script you have to set the environment variables bellow:
     \e[33mGITHUB_TOKEN\e[0m
 OR
     \e[33mGITHUB_USER
