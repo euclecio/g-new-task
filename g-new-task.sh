@@ -27,9 +27,9 @@ OR
 fi
 
 if [ ! -z ${GITHUB_TOKEN+x} ]; then
-    issue_exists=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/compufour/compufacil/issues/$issue_name | grep message)
+    issue_exists=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/$repo_path/issues/$issue_name | grep message)
 else
-    issue_exists=$(curl -s -u $GITHUB_USER:$GITHUB_PASSWORD https://api.github.com/repos/compufour/compufacil/issues/$issue_name | grep message)
+    issue_exists=$(curl -s -u $GITHUB_USER:$GITHUB_PASSWORD https://api.github.com/repos/$repo_path/issues/$issue_name | grep message)
 fi
 
 if [[ $issue_exists == *"Not Found"* ]]; then
