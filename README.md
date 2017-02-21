@@ -6,16 +6,18 @@ This script will create a new branch with the *issue* id on your repository and 
 How to use
 ----------
 
-If you want to use this script you have to set the environment variables bellow on `~/.bashrc` (or another file of your choice):   
-`GITHUB_TOKEN`   
-or   
-`GITHUB_USER`   
-`GITHUB_PASSWORD`
+If you want to use this script you have to set the environment variables bellow on `~/.bashrc` (or another file as your choice):
+```sh
+export GITHUB_TOKEN=tokenValue
+#or
+export GITHUB_USER=username
+export GITHUB_PASSWORD=userpass
+```
 
-Usage:   
+Usage:
 
 ```sh
-~/path/project $ g-new-task issueID
+/path/project $ g-new-task issueID
 
 ```
 
