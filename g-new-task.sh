@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-issue_name=$1
+issue_number=$1
 
 if [ ! $(git rev-parse --is-inside-work-tree) ]; then
     exit 1;
@@ -27,9 +27,9 @@ OR
 fi
 
 if [ ! -z ${GITHUB_TOKEN+x} ]; then
-    issue_exists=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/$repo_path/issues/$issue_name | grep message)
+    issue_exists=$(curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/$repo_path/issues/$issue_number | grep message)
 else
-    issue_exists=$(curl -s -u $GITHUB_USER:$GITHUB_PASSWORD https://api.github.com/repos/$repo_path/issues/$issue_name | grep message)
+    issue_exists=$(curl -s -u $GITHUB_USER:$GITHUB_PASSWORD https://api.github.com/repos/$repo_path/issues/$issue_number | grep message)
 fi
 
 if [[ $issue_exists == *"Not Found"* ]]; then
@@ -37,7 +37,7 @@ if [[ $issue_exists == *"Not Found"* ]]; then
     exit 1
 fi
 
-if [[ $(git branch | grep $issue_name) ]]; then
+if [[ $(git branch | grep $issue_number) ]]; then
     printf "\e[33mThis branch already exists.\e[0m\n"
     exit 1
 fi
@@ -46,18 +46,12 @@ echo "Entering master to create branch from it..."
 git checkout master
 git fetch origin
 git pull origin master
-git checkout -b $issue_name
+git checkout -b $issue_number
 
-if [ ! -z ${GITHUB_TOKEN+x} ]; then
-    curl -s -X DELETE -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/$repo_path/issues/$issue_name/labels/Stage%3A%20Analysis >/dev/null
-    curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/$repo_path/issues/$issue_name/labels -d '["Stage: In Progress"]' >/dev/null
+if [ ! -z ${GITHUB_TOKEN+x} ]; thenz
+    curl -s -X DELETE -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/$repo_path/issues/$issue_number/labels/Stage%3A%20Analysis >/dev/null
+    curl -s -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/$repo_path/issues/$issue_number/labels -d '["Stage: In Progress"]' >/dev/null
 else
-    curl -s -X DELETE -u $GITHUB_USER:$GITHUB_PASSWORD https://api.github.com/repos/$repo_path/issues/$issue_name/labels/Stage%3A%20Analysis >/dev/null
-    curl -s -u $GITHUB_USER:$GITHUB_PASSWORD https://api.github.com/repos/$repo_path/issues/$issue_name/labels -d '["Stage: In Progress"]' >/dev/null
+    curl -s -X DELETE -u $GITHUB_USER:$GITHUB_PASSWORD https://api.github.com/repos/$repo_path/issues/$issue_number/labels/Stage%3A%20Analysis >/dev/null
+    curl -s -u $GITHUB_USER:$GITHUB_PASSWORD https://api.github.com/repos/$repo_path/issues/$issue_number/labels -d '["Stage: In Progress"]' >/dev/null
 fi
-
-
-#message="$USER created local branch $issue_name"
-#curl -X POST --data-urlencode \
-#    "payload={\"channel\": \"#devops\", \"username\": \"Notice \", \"text\": \"$message\", \"icon_emoji\": \":ghost:\"}" \
-#    https://hooks.slack.com/services/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
