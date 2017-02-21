@@ -23,7 +23,7 @@ g-new-task issueID
 ```
 
 ```sh
-    -h    Script helper
+    --help, -h    Script helper
 ```
 
 Install
