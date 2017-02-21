@@ -9,7 +9,7 @@ How to use
 If you want to use this script you have to set the environment variables bellow on `~/.bashrc` (or another file as your choice):
 ```sh
 export GITHUB_TOKEN=tokenValue
-#or
+#OR
 export GITHUB_USER=username
 export GITHUB_PASSWORD=userpass
 ```
@@ -17,7 +17,8 @@ export GITHUB_PASSWORD=userpass
 Usage:
 
 ```sh
-/path/project $ g-new-task issueID
+cd /path/your-project
+g-new-task issueID
 
 ```
 
