@@ -32,4 +32,4 @@ To install into your machine run the commands bellow:
 curl -sL https://raw.githubusercontent.com/euclecio/g-new-task/master/g-new-task.sh -o /usr/local/bin/g-new-task
 chmod a+x /usr/local/bin/g-new-task
 ```
-If it didn't work, try run with with `sudo`
+If it didn't work, try run it with `sudo`
