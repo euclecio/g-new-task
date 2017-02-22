@@ -37,7 +37,7 @@ if [[ $issue_exists == *"Not Found"* ]]; then
     exit 1
 fi
 
-if [[ $(git branch | grep $issue_number) ]]; then
+if [[ $(git branch | grep $issue_number) ]] || [[ $(git branch -r | grep $issue_number) ]]; then
     printf "\e[33mThis branch already exists.\e[0m\n"
     exit 1
 fi
