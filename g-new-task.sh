@@ -8,7 +8,7 @@ fi
 repo_path=$(git config --get remote.origin.url | sed -r 's/(.*:)(.*)(\..*)/\2/')
 
 if [[ -z $1 ]] || [[ $1 == '--help' ]] || [[ $1 == '-h' ]]; then
-    printf " Creates a new branch in you computer and change stage from Analysis to In progress
+    printf " Creates a new branch in your computer and change the stage from Analysis to In progress
 
  Usage:
     g-new-task issueID
@@ -42,11 +42,9 @@ if [[ $(git branch | grep $issue_number) ]]; then
     exit 1
 fi
 
-echo "Entering master to create branch from it..."
-git checkout master
+echo "Creating branch from master..."
 git fetch origin
-git pull origin master
-git checkout -b $issue_number
+git checkout -b $issue_number origin/master
 
 if [ ! -z ${GITHUB_TOKEN+x} ]; then
     curl -s -X DELETE -H "Authorization: token $GITHUB_TOKEN" https://api.github.com/repos/$repo_path/issues/$issue_number/labels/Stage%3A%20Analysis >/dev/null
