@@ -24,6 +24,7 @@ if [ -z ${GITHUB_USER+x} ] || [ -z ${GITHUB_PASSWORD+x} ] && [ -z ${GITHUB_TOKEN
 OR
     \e[33mGITHUB_USER
     GITHUB_PASSWORD\e[0m\n"
+    exit 1;
 fi
 
 if [ ! -z ${GITHUB_TOKEN+x} ]; then
